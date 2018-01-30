@@ -20,6 +20,9 @@ import io.kotlintest.matchers.shouldBe
 import io.kotlintest.properties.Gen
 import io.kotlintest.specs.ShouldSpec
 
+/**
+ * Test suite for [ParticleBuffer].
+ */
 class ParticleBufferTest : ShouldSpec() {
 
     init {

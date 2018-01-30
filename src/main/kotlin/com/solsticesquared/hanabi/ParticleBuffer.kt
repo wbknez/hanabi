@@ -81,10 +81,13 @@ class ParticleBuffer(numParticles: Int, val stride: Int = 4)
     override fun iterator(): Iterator<Float> = this.data.iterator()
 
     /**
-     *
+     * Assigns the data element at the specified index in this particle buffer
+     * to the specified value.
      *
      * @param index
+     *        The index to assign a value to.
      * @param value
+     *        The new value to use.
      * @return A reference to this particle buffer for easy chaining.
      */
     fun put(index: Int, value: Float): ParticleBuffer {
