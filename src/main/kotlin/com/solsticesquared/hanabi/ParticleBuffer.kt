@@ -31,7 +31,7 @@ import java.util.Arrays
  * @property stride
  *           The number of data elements assigned per particle.
  */
-class ParticleBuffer(numParticles: Int, val stride: Int = 4) {
+class ParticleBuffer(numParticles: Int, val stride: Int = 4) : Iterable<Float> {
 
     private val data = FloatArray(numParticles * stride)
 
@@ -71,9 +71,11 @@ class ParticleBuffer(numParticles: Int, val stride: Int = 4) {
         Arrays.fill(this.data, value)
     }
 
+    operator fun get(index: Int): Float = this.data[index]
+
     override fun hashCode(): Int = hash(this.data, this.stride)
 
-    operator fun get(index: Int): Float = this.data[index]
+    override fun iterator(): Iterator<Float> = this.data.iterator()
 
     operator fun set(index: Int, value: Float) { this.data[index] = value }
 
