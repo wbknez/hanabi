@@ -20,7 +20,7 @@ package com.solsticesquared.hanabi
  * Represents a collection of particles who are themselves represented as a
  * collection of distinct yet contiguous blocks of data elements.
  *
- * @property buffer
+ * @property data
  *           The contiguous array of particle data.
  * @property particles
  *           The total number of particles this buffer supports.
@@ -31,13 +31,13 @@ package com.solsticesquared.hanabi
  */
 class ParticleBuffer(numParticles: Int, val stride: Int = 4) {
 
-    private val buffer = FloatArray(numParticles * stride)
+    private val data = FloatArray(numParticles * stride)
 
     val particles: Int
-        get() = this.buffer.size / this.stride
+        get() = this.data.size / this.stride
 
     val size: Int
-        get() = this.buffer.size
+        get() = this.data.size
 
     /**
      * Constructor.
@@ -46,21 +46,21 @@ class ParticleBuffer(numParticles: Int, val stride: Int = 4) {
      *        The particle buffer to copy from.
      */
     constructor(particles: ParticleBuffer?)
-        : this(particles!!.buffer.size, particles.stride) {
-        System.arraycopy(particles.buffer, 0, this.buffer, 0,
-                         particles.buffer.size)
+        : this(particles!!.data.size, particles.stride) {
+        System.arraycopy(particles.data, 0, this.data, 0,
+                         particles.data.size)
     }
 
     override fun equals(other: Any?): Boolean =
         when(other) {
-            is ParticleBuffer -> this.buffer.contentEquals(other.buffer) &&
+            is ParticleBuffer -> this.data.contentEquals(other.data) &&
                                  this.stride == other.stride
             else              -> false
         }
 
-    override fun hashCode(): Int = hash(this.buffer, this.stride)
+    override fun hashCode(): Int = hash(this.data, this.stride)
 
-    operator fun get(index: Int): Float = this.buffer[index]
+    operator fun get(index: Int): Float = this.data[index]
 
-    operator fun set(index: Int, value: Float) { this.buffer[index] = value }
+    operator fun set(index: Int, value: Float) { this.data[index] = value }
 }
