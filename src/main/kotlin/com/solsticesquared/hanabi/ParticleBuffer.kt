@@ -80,6 +80,18 @@ class ParticleBuffer(numParticles: Int, val stride: Int = 4)
 
     override fun iterator(): Iterator<Float> = this.data.iterator()
 
+    /**
+     *
+     *
+     * @param index
+     * @param value
+     * @return A reference to this particle buffer for easy chaining.
+     */
+    fun put(index: Int, value: Float): ParticleBuffer {
+        this.data[index] = value
+        return this
+    }
+
     operator fun set(index: Int, value: Float) { this.data[index] = value }
 
     /**
@@ -93,9 +105,12 @@ class ParticleBuffer(numParticles: Int, val stride: Int = 4)
      *        The index of the second particle to swap.
      */
     fun swap(indexA: Int, indexB: Int) {
+        val offSetA = indexA * stride
+        val offSetB = indexB * stride
+
         for(i in 0..(this.stride - 1)) {
-            this.data[indexA + i] = this.data[indexB + i].also {
-                this.data[indexB + i] = this.data[indexA + i]
+            this.data[offSetA + i] = this.data[offSetB + i].also {
+                this.data[offSetB + i] = this.data[offSetA + i]
             }
         }
     }
