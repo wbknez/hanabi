@@ -1,0 +1,72 @@
+// -*- mode: groovy -*-
+//
+// Summary: Build file for Hanabi.
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath "org.junit.platform:junit-platform-gradle-plugin:$junitBridgeVersion"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
+    }
+}
+
+ext {
+    libraries = [
+        junit: [
+            api:   "org.junit.jupiter:junit-jupiter-api:$junitVersion",
+            engine: "org.junit.jupiter:junit-jupiter-engine:$junitVersion",
+            launcher: "org.junit.platform:junit-platform-launcher:$junitBridgeVersion",
+            runner:   "org.junit.platform:junit-platform-runner:$junitBridgeVersion",
+            vintage: "org.junit.vintage:junit-vintage-engine:$junitVersion"
+        ],
+        kotlin: [
+            reflect: "org.jetbrains.kotlin:kotlin-reflect",
+            stdlib: "org.jetbrains.kotlin:kotlin-stdlib-jre8",
+        ],
+        kotlintest: "io.kotlintest:kotlintest:$kotlinTestVersion",
+        tornadofx: "no.tornado:tornadofx:$tornadoFXVersion"
+    ]
+}
+
+apply plugin: "application"
+apply plugin: "idea"
+apply plugin: "kotlin"
+apply plugin: "org.junit.platform.gradle.plugin"
+
+mainClassName = ext.groupName + "." + ext.artifactName + ".app.AppEntry"
+
+dependencies {
+    compile libraries.kotlin.reflect
+    compile libraries.kotlin.stdlib
+    compile libraries.tornadofx
+
+    testCompile libraries.junit.api
+    testCompile libraries.kotlintest
+    testRuntime libraries.junit.engine
+    testRuntime libraries.junit.launcher
+    testRuntime libraries.junit.runner
+    testRuntime libraries.junit.vintage
+}
+
+junitPlatform {
+	filters {
+		engines {
+			include 'junit-vintage'
+		}
+		tags {
+			exclude 'slow'
+		}
+	}
+}
+
+repositories {
+    mavenCentral()
+}
+
+sourceSets {
+    main.kotlin.srcDirs += 'src/main/kotlin'
+    test.kotlin.srcDirs += "src/test/kotlin"
+}
