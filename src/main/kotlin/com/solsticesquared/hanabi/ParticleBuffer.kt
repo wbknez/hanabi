@@ -31,7 +31,8 @@ import java.util.Arrays
  * @property stride
  *           The number of data elements assigned per particle.
  */
-class ParticleBuffer(numParticles: Int, val stride: Int = 4) : Iterable<Float> {
+class ParticleBuffer(numParticles: Int, val stride: Int = 4)
+    : Cloneable, Iterable<Float> {
 
     private val data = FloatArray(numParticles * stride)
 
@@ -52,6 +53,8 @@ class ParticleBuffer(numParticles: Int, val stride: Int = 4) : Iterable<Float> {
         System.arraycopy(particles.data, 0, this.data, 0,
                          particles.data.size)
     }
+
+    override public fun clone(): ParticleBuffer = ParticleBuffer(this)
 
     override fun equals(other: Any?): Boolean =
         when(other) {
