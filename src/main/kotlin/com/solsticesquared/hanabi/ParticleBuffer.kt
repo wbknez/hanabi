@@ -31,7 +31,7 @@ import java.util.Arrays
  * @property stride
  *           The number of data elements assigned per particle.
  */
-class ParticleBuffer(numParticles: Int, val stride: Int = 4)
+class ParticleBuffer(numParticles: Int, @JvmField val stride: Int = 4)
     : Cloneable, Iterable<Float> {
 
     private val data = FloatArray(numParticles * stride)

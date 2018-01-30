@@ -28,7 +28,7 @@ package com.solsticesquared.hanabi
  * @property numParticles
  *           The total number of particles this particle pool can support.
  */
-class ParticlePool(val numParticles: Int) {
+class ParticlePool(@JvmField val numParticles: Int) {
 
     private val buffers = mutableMapOf<String, ParticleBuffer>()
 
