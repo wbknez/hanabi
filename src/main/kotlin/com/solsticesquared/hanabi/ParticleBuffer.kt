@@ -16,6 +16,8 @@
 
 package com.solsticesquared.hanabi
 
+import java.util.Arrays
+
 /**
  * Represents a collection of particles who are themselves represented as a
  * collection of distinct yet contiguous blocks of data elements.
@@ -58,9 +60,38 @@ class ParticleBuffer(numParticles: Int, val stride: Int = 4) {
             else              -> false
         }
 
+    /**
+     * Assigns every data element of this particle buffer to the specified
+     * value.
+     *
+     * @param value
+     *        The value to fill the buffer with.
+     */
+    fun fill(value: Float) {
+        Arrays.fill(this.data, value)
+    }
+
     override fun hashCode(): Int = hash(this.data, this.stride)
 
     operator fun get(index: Int): Float = this.data[index]
 
     operator fun set(index: Int, value: Float) { this.data[index] = value }
+
+    /**
+     * Swaps the data blocks of the specified particles with one another,
+     * performing an element-wise swap for every available data element up to
+     * this particle buffer's stride.
+     *
+     * @param indexA
+     *        The index of the first partcle to swap.
+     * @param indexB
+     *        The index of the second particle to swap.
+     */
+    fun swap(indexA: Int, indexB: Int) {
+        for(i in 0..(this.stride - 1)) {
+            this.data[indexA + i] = this.data[indexB + i].also {
+                this.data[indexB + i] = this.data[indexA + i]
+            }
+        }
+    }
 }
