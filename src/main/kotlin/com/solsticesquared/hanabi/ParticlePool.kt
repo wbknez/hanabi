@@ -156,12 +156,14 @@ class ParticlePool(@JvmField val maxParticles: Int) {
         }
 
         for(buffer in this.cache) {
-            var tempAlive = this.numAlive
+            var tempAlive = this.numAlive - 1
             for(i in first..(last - 1)) {
                 buffer.swap(i, tempAlive)
-                tempAlive += 1
+                tempAlive -= 1
             }
         }
+
+        this.numAlive -= (last - first)
     }
 
     /**
