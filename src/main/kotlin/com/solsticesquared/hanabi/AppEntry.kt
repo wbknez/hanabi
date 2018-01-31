@@ -16,6 +16,9 @@
 
 package com.solsticesquared.hanabi
 
+import com.solsticesquared.hanabi.ui.AppUi
+import javafx.application.Application
+
 /**
  * The main driver for the Hanabi Particle System Editor project.
  */
@@ -30,6 +33,7 @@ sealed class AppEntry {
          */
         @JvmStatic
         fun main(args: Array<String>) {
+            Application.launch(AppUi::class.java, *args)
         }
     }
 }
