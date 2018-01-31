@@ -16,9 +16,11 @@
 
 package com.solsticesquared.hanabi.ui
 
-import javafx.scene.Parent
 import javafx.scene.layout.BorderPane
 import tornadofx.View
+import tornadofx.borderpane
+import tornadofx.tab
+import tornadofx.tabpane
 
 /**
  * Represents an implementation of [View] that serves as the basis of the
@@ -26,10 +28,24 @@ import tornadofx.View
  */
 class MainView : View() {
 
-    override val root: Parent = BorderPane()
+    override val root = BorderPane()
 
     init {
 
+        with(this.root) {
 
+            // left: Example selection.
+
+            center = borderpane {
+
+                center = tabpane {
+
+                    tab("Visualization")
+                    tab("Source Code")
+                }
+            }
+
+            // right: Control/widget panel.
+        }
     }
 }
