@@ -25,10 +25,10 @@ package com.solsticesquared.hanabi
  *           The number of particles that are currently active, or alive.
  * @property numDead
  *           The number of particles that are currently not alive.
- * @property numParticles
+ * @property maxParticles
  *           The total number of particles this particle pool can support.
  */
-class ParticlePool(@JvmField val numParticles: Int) {
+class ParticlePool(@JvmField val maxParticles: Int) {
 
     private val buffers = mutableMapOf<String, ParticleBuffer>()
 
@@ -38,7 +38,7 @@ class ParticlePool(@JvmField val numParticles: Int) {
         private set
 
     val numDead: Int
-        get() = this.numParticles - this.numAlive
+        get() = this.maxParticles - this.numAlive
 
     /**
      * Creates a new particle buffer and adds it to this particle pool,
@@ -54,7 +54,7 @@ class ParticlePool(@JvmField val numParticles: Int) {
             "The stride must be positive."
         }
 
-        this.addBuffer(name, ParticleBuffer(this.numParticles, stride))
+        this.addBuffer(name, ParticleBuffer(this.maxParticles, stride))
     }
 
     /**
@@ -172,7 +172,7 @@ class ParticlePool(@JvmField val numParticles: Int) {
      *        The number of particles to wake.
      */
     fun wake(amount: Int) {
-        require(this.numAlive + amount <= this.numParticles) {
+        require(this.numAlive + amount <= this.maxParticles) {
             "Attempting to wake more particles than this buffer can support."
         }
 
