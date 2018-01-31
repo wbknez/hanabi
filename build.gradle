@@ -27,6 +27,7 @@ ext {
             stdlib: "org.jetbrains.kotlin:kotlin-stdlib-jre8",
         ],
         kotlintest: "io.kotlintest:kotlintest:$kotlinTestVersion",
+        richtextfx: "org.fxmisc.richtext:richtextfx:$richTextFXVersion",
         tornadofx: "no.tornado:tornadofx:$tornadoFXVersion"
     ]
 }
@@ -41,6 +42,7 @@ mainClassName = ext.groupName + "." + ext.artifactName + ".AppEntry"
 dependencies {
     compile libraries.kotlin.reflect
     compile libraries.kotlin.stdlib
+    compile libraries.richtextfx
     compile libraries.tornadofx
 
     testCompile libraries.junit.api
