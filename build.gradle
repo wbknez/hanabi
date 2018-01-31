@@ -36,7 +36,7 @@ apply plugin: "idea"
 apply plugin: "kotlin"
 apply plugin: "org.junit.platform.gradle.plugin"
 
-mainClassName = ext.groupName + "." + ext.artifactName + ".app.AppEntry"
+mainClassName = ext.groupName + "." + ext.artifactName + ".AppEntry"
 
 dependencies {
     compile libraries.kotlin.reflect
