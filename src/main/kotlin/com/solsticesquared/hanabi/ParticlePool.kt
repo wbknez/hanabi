@@ -41,6 +41,75 @@ class ParticlePool(@JvmField val numParticles: Int) {
         get() = this.numParticles - this.numAlive
 
     /**
+     * Creates a new particle buffer and adds it to this particle pool,
+     * associating it with the specified name.
+     *
+     * @param name
+     *        The name to use.
+     * @param stride
+     *        The number of data elements per particle.
+     */
+    fun addBuffer(name: String, stride: Int = 4) {
+        require(stride > 0) {
+            "The stride must be positive."
+        }
+
+        this.addBuffer(name, ParticleBuffer(this.numParticles, stride))
+    }
+
+    /**
+     * Adds the specified particle buffer to this particle pool, associating
+     * it with the specified name.
+     *
+     * @param name
+     *        The name to use.
+     * @param buffer
+     *        The particle buffer to add.
+     */
+    fun addBuffer(name: String, buffer: ParticleBuffer) {
+        require(!this.buffers.containsKey(name)) {
+            "A buffer with $name already exists."
+        }
+
+        this.buffers.put(name, buffer)
+        this.cache.add(buffer)
+    }
+
+    operator fun get(name: String): ParticleBuffer {
+        require(this.buffers.containsKey(name)) {
+            "No buffer with $name exists."
+        }
+
+        return this.buffers.get(name)!!
+    }
+
+    /**
+     * Finds and returns the particle buffer associated with the specified
+     * name in this particle pool.
+     *
+     * @param name
+     *        The name of the buffer to retrieve.
+     */
+    fun getBuffer(name: String): ParticleBuffer {
+        return this.get(name)
+    }
+
+    /**
+     * Removes the particle buffer with the specified name from this particle
+     * pool.
+     *
+     * @param name
+     *        The name of the buffer to remove.
+     */
+    fun removeBuffer(name: String) {
+        require(this.buffers.containsKey(name)) {
+            "No buffer with $name exists."
+        }
+
+        this.cache.remove(this.buffers.remove(name))
+    }
+
+    /**
      * Removes the particle at the specified index in this particle buffer
      * from the range of active particles, so that it will no longer
      * be updated or drawn.
