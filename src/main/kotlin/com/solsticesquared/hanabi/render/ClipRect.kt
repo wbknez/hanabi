@@ -39,6 +39,21 @@ data class ClipRect(var x: Double, var y: Double,
     /**
      * Constructor.
      *
+     * @param x
+     *        The x-axis origin coordinate to use, given as an integer.
+     * @param y
+     *        The y-axis origin coordinate to use, given as an integer.
+     * @param width
+     *        The width of the clipping area to use, given as an integer.
+     * @param height
+     *        The height of the clipping area to use, given as an integer.
+     */
+    constructor(x: Int, y: Int, width: Int, height: Int)
+        : this(x.toDouble(), y.toDouble(), width.toDouble(), height.toDouble())
+
+    /**
+     * Constructor.
+     *
      * @param clip
      *        The clipping rectangle to copy from.
      */
