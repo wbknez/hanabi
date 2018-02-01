@@ -78,6 +78,11 @@ class ParticlePoolTest : ShouldSpec() {
          * The utility to generate randomized [ParticlePool] objects.
          */
         val PoolGen = ParticlePoolGenerator()
+
+        /**
+         * The pseudo-random number generator.
+         */
+        val RandomGen = ThreadLocalRandom.current()
     }
 
     init {
@@ -101,8 +106,7 @@ class ParticlePoolTest : ShouldSpec() {
         "waking up multiple particles" {
             should("incrememnt the number of alive particles by that amount") {
                 val pool = PoolGen.generate()
-                val amount =
-                    ThreadLocalRandom.current().nextInt(1, pool.maxParticles)
+                val amount = RandomGen.nextInt(1, pool.maxParticles)
 
                 pool.wake(amount)
                 pool.numAlive shouldBe amount
@@ -110,8 +114,7 @@ class ParticlePoolTest : ShouldSpec() {
 
             should("fail if at capacity") {
                 val pool = PoolGen.generate()
-                val amount =
-                    ThreadLocalRandom.current().nextInt(1, 1000)
+                val amount = RandomGen.nextInt(1, 1000)
 
                 pool.wake(pool.maxParticles)
                 shouldThrow<IllegalArgumentException> { pool.wake(amount) }
@@ -121,20 +124,20 @@ class ParticlePoolTest : ShouldSpec() {
         "putting a single particle to sleep" {
             should("reduce the number of active particles by one") {
                 val pool = PoolGen.generate()
+                val amount = RandomGen.nextInt(1, pool.maxParticles)
 
-                pool.wake(2)
-                pool.numAlive shouldBe 2
+                pool.wake(amount)
+                pool.numAlive shouldBe amount
 
                 pool.sleep(0)
-                pool.numAlive shouldBe 1
+                pool.numAlive shouldBe amount - 1
             }
         }
 
         "putting multiple particles to sleep" {
             should("reduce the number of active particles by that amount") {
                 val pool = PoolGen.generate()
-                val amount =
-                    ThreadLocalRandom.current().nextInt(1, pool.maxParticles)
+                val amount = RandomGen.nextInt(1, pool.maxParticles)
 
                 pool.wake(pool.maxParticles)
                 pool.numAlive shouldBe pool.maxParticles
