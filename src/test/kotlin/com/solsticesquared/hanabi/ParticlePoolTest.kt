@@ -137,7 +137,7 @@ class ParticlePoolTest : ShouldSpec() {
         "putting multiple particles to sleep" {
             should("reduce the number of active particles by that amount") {
                 val pool = PoolGen.generate()
-                val amount = RandomGen.nextInt(1, pool.maxParticles)
+                val amount = RandomGen.nextInt(1, pool.maxParticles + 1)
 
                 pool.wake(pool.maxParticles)
                 pool.numAlive shouldBe pool.maxParticles
