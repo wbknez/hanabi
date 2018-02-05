@@ -59,9 +59,12 @@ class SimplePointRenderer(var size: Double = 5.0) : Renderer {
             color.marshal(i, colorBuffer)
             position.marshal(i, posBuffer)
 
-            rc.graphics.fill = color.toPaint()
-            rc.graphics.fillOval(position.x.toDouble(), position.y.toDouble(),
-                                 this.size, this.size)
+            if(rc.clip.contains(position.x.toDouble(), position.y.toDouble())) {
+                rc.graphics.fill = color.toPaint()
+                rc.graphics.fillOval(position.x.toDouble(),
+                                     position.y.toDouble(),
+                                     this.size, this.size)
+            }
         }
     }
 }
