@@ -16,6 +16,7 @@
 
 package com.solsticesquared.hanabi.ui
 
+import com.solsticesquared.hanabi.render.RenderContext
 import javafx.scene.layout.BorderPane
 import tornadofx.View
 import tornadofx.borderpane
@@ -27,6 +28,8 @@ import tornadofx.tabpane
  * user interface for this project.
  */
 class MainView : View() {
+
+    private val context = RenderContext(600, 600)
 
     override val root = BorderPane()
 
@@ -40,8 +43,16 @@ class MainView : View() {
 
                 center = tabpane {
 
-                    tab("Visualization")
-                    tab("Source Code")
+                    tab("Visualization") {
+                        borderpane {
+                            center = context.canvas
+                        }
+                    }
+                    tab("Source Code") {
+                        borderpane {
+
+                        }
+                    }
                 }
             }
 
