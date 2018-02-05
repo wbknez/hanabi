@@ -32,8 +32,8 @@ import com.solsticesquared.hanabi.hash
  * @property w
  *           The w-axis coordinate.
  */
-open class Tuple4(@JvmField var x: Float = 0f, @JvmField var y: Float = 0f,
-                  @JvmField var z: Float = 0f, @JvmField var w: Float = 0f)
+open class Tuple4(var x: Float = 0f, var y: Float = 0f,
+                  var z: Float = 0f, var w: Float = 0f)
     : Cloneable {
 
     /**
