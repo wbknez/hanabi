@@ -29,10 +29,10 @@ interface Renderer {
      * Releases any and all resources associated with the specified graphical
      * display.
      *
-     * @param gc
+     * @param rc
      *        The graphical display to draw to.
      */
-    fun cleanUp(gc: GraphicsContext)
+    fun cleanUp(rc: RenderContext)
 
     /**
      * Releases any and all resources used by the specified particle system
@@ -40,19 +40,19 @@ interface Renderer {
      *
      * @param system
      *        The particle system to clean up.
-     * @param gc
+     * @param rc
      *        The graphical display to draw to.
      */
-    fun cleanUpParticleSystem(system: ParticleSystem, gc: GraphicsContext)
+    fun cleanUpParticleSystem(system: ParticleSystem, rc: RenderContext)
 
     /**
      * Initializes any and all resources to be used with the specified
      * graphics display.
      *
-     * @param gc
+     * @param rc
      *        The graphical display to draw to.
      */
-    fun initialize(gc: GraphicsContext)
+    fun initialize(rc: RenderContext)
 
     /**
      * Initializes any and all resources used by the specific particle system
@@ -60,18 +60,18 @@ interface Renderer {
      *
      * @param system
      *        The particle system to initialize rendering state for.
-     * @param gc
+     * @param rc
      *        The graphical display to draw to.
      */
-    fun initializeParticleSystem(system: ParticleSystem, gc: GraphicsContext)
+    fun initializeParticleSystem(system: ParticleSystem, rc: RenderContext)
 
     /**
      * Draws the specified particle system to the specified graphical display.
      *
      * @param system
      *        The particle system to draw.
-     * @param gc
+     * @param rc
      *        The graphical display to draw to.
      */
-    fun render(system: ParticleSystem, gc: GraphicsContext)
+    fun render(system: ParticleSystem, rc: RenderContext)
 }

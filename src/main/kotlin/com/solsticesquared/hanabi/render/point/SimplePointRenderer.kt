@@ -19,8 +19,8 @@ package com.solsticesquared.hanabi.render.point
 import com.solsticesquared.hanabi.ParticleSystem
 import com.solsticesquared.hanabi.math.Color4
 import com.solsticesquared.hanabi.math.Vector3
+import com.solsticesquared.hanabi.render.RenderContext
 import com.solsticesquared.hanabi.render.Renderer
-import javafx.scene.canvas.GraphicsContext
 
 /**
  * Represents an implementation of [Renderer] that draws each particle as a
@@ -31,36 +31,37 @@ import javafx.scene.canvas.GraphicsContext
  */
 class SimplePointRenderer(var size: Double = 5.0) : Renderer {
 
-    override fun cleanUp(gc: GraphicsContext) {
+    override fun cleanUp(rc: RenderContext) {
     }
 
     override fun cleanUpParticleSystem(system: ParticleSystem,
-                                       gc: GraphicsContext) {
+                                       rc: RenderContext) {
     }
 
-    override fun initialize(gc: GraphicsContext) {
+    override fun initialize(rc: RenderContext) {
     }
 
     override fun initializeParticleSystem(system: ParticleSystem,
-                                          gc: GraphicsContext) {
+                                          rc: RenderContext) {
     }
 
-    override fun render(system: ParticleSystem, gc: GraphicsContext) {
+    override fun render(system: ParticleSystem, rc: RenderContext) {
         val colorBuffer = system.pool["color"]
         val posBuffer = system.pool["pos"]
 
         val color = Color4()
         val position = Vector3()
 
-        gc.clearRect(0.0, 0.0, gc.canvas.width, gc.canvas.height)
+        rc.graphics.clearRect(rc.clip.y, rc.clip.y,
+                              rc.clip.width, rc.clip.height)
 
         for(i in 0..(system.pool.numAlive - 1)) {
             color.marshal(i, colorBuffer)
             position.marshal(i, posBuffer)
 
-            gc.fill = color.toPaint()
-            gc.fillOval(position.x.toDouble(), position.y.toDouble(),
-                        this.size, this.size)
+            rc.graphics.fill = color.toPaint()
+            rc.graphics.fillOval(position.x.toDouble(), position.y.toDouble(),
+                                 this.size, this.size)
         }
     }
 }

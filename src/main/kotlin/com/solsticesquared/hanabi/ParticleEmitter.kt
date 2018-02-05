@@ -37,5 +37,5 @@ abstract class ParticleEmitter {
      * @param pool
      *        The pool of particle data to emit.
      */
-    abstract fun emit(dt: Float, pool: ParticlePool)
+    abstract fun emit(dt: Double, pool: ParticlePool)
 }

@@ -35,5 +35,5 @@ interface ParticleGenerator {
      * @param last
      *        The index of the last particle to generate state for, exclusive.
      */
-    fun generate(dt: Float, pool: ParticlePool, first: Int, last: Int)
+    fun generate(dt: Double, pool: ParticlePool, first: Int, last: Int)
 }

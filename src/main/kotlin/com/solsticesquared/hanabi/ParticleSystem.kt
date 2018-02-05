@@ -47,7 +47,7 @@ class ParticleSystem(maxParticles: Int, val sprite: Image? = null) {
      *        The amount of time that has elapsed since the last update,
      *        given in fractions of a second.
      */
-    fun update(dt: Float) {
+    fun update(dt: Double) {
         this.emitters.forEach({ it.emit(dt, this.pool) })
         this.updaters.forEach({ it.update(dt, this.pool) })
     }

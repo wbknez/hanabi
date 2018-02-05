@@ -30,5 +30,5 @@ interface ParticleUpdater {
      * @param pool
      *        The pool of particle data to update.
      */
-    fun update(dt: Float, pool: ParticlePool)
+    fun update(dt: Double, pool: ParticlePool)
 }
