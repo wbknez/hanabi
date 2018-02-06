@@ -16,18 +16,33 @@
 
 package com.solsticesquared.hanabi.ui
 
+import com.solsticesquared.hanabi.render.Animator
 import com.solsticesquared.hanabi.render.RenderContext
+import com.sun.javafx.binding.ContentBinding.bind
+import javafx.scene.control.TabPane
 import javafx.scene.layout.BorderPane
+import javafx.scene.layout.Priority
 import tornadofx.View
 import tornadofx.borderpane
+import tornadofx.button
+import tornadofx.flowpane
+import tornadofx.hbox
+import tornadofx.hgrow
+import tornadofx.label
 import tornadofx.tab
 import tornadofx.tabpane
+import tornadofx.textfield
+import tornadofx.toolbar
 
 /**
  * Represents an implementation of [View] that serves as the basis of the
  * user interface for this project.
  */
 class MainView : View() {
+
+    private val animator by lazy{
+        Animator(this.context, null, null)
+    }
 
     private val context = RenderContext(600, 600)
 
@@ -43,6 +58,8 @@ class MainView : View() {
 
                 center = tabpane {
 
+                    tabClosingPolicy = TabPane.TabClosingPolicy.UNAVAILABLE
+
                     tab("Visualization") {
                         borderpane {
                             center = context.canvas
@@ -53,6 +70,17 @@ class MainView : View() {
 
                         }
                     }
+                }
+
+                bottom = toolbar {
+                    button("Play")
+                    button("Pause")
+                    button("Stop")
+                    hbox(10) {
+                        this.hgrow = Priority.ALWAYS
+                    }
+                    label("FPS:")
+                    label("00.00")
                 }
             }
 
