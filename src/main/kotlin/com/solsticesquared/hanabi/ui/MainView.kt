@@ -19,6 +19,7 @@ package com.solsticesquared.hanabi.ui
 import com.solsticesquared.hanabi.render.Animator
 import com.solsticesquared.hanabi.render.RenderContext
 import com.sun.javafx.binding.ContentBinding.bind
+import javafx.geometry.Insets
 import javafx.scene.control.TabPane
 import javafx.scene.layout.BorderPane
 import javafx.scene.layout.Priority
@@ -67,7 +68,6 @@ class MainView : View() {
                     }
                     tab("Source Code") {
                         borderpane {
-
                         }
                     }
                 }
