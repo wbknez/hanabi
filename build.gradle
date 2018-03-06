@@ -15,7 +15,6 @@ buildscript {
 
 ext {
     libraries = [
-        jruby: "org.jruby:jruby-complete:$jrubyVersion",
         junit: [
             api:   "org.junit.jupiter:junit-jupiter-api:$junitVersion",
             engine: "org.junit.jupiter:junit-jupiter-engine:$junitVersion",
@@ -41,7 +40,6 @@ apply plugin: "org.junit.platform.gradle.plugin"
 mainClassName = ext.groupName + "." + ext.artifactName + ".AppEntry"
 
 dependencies {
-    compile libraries.jruby
     compile libraries.kotlin.reflect
     compile libraries.kotlin.stdlib
     compile libraries.richtextfx
