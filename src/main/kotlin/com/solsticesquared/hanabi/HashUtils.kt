@@ -21,7 +21,7 @@ package com.solsticesquared.hanabi
  *
  * This method is inspired by both Python's method of hashing objects as well
  * as the Kotlin library HashKode, the latter from which the constants are
- * chosen.  This method allows classes to write one-line hash code
+ * taken.  This method allows classes to write one-line hash code
  * implementations without needing to concern themselves with best practices
  * or explicit result values.  The implementation itself comes from Josh
  * Bloch's "Effective Java" and uses both a prime initial value as well as a
