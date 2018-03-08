@@ -23,10 +23,10 @@ package com.solsticesquared.hanabi.ui.property
  * @property name
  *           The display name to use.
  */
+@ComponentProperty
 @MustBeDocumented
 @Retention(AnnotationRetention.RUNTIME)
 @Target(AnnotationTarget.FIELD)
-@ComponentProperty
 annotation class NamesSelf(
     val name: String
 )

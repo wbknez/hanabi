@@ -84,7 +84,7 @@ class MainView : View() {
                 }
             }
 
-            // right: Control/widget panel.
+            // right: Control/property panel.
         }
     }
 }

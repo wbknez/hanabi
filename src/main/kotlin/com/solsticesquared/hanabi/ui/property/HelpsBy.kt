@@ -23,10 +23,10 @@ package com.solsticesquared.hanabi.ui.property
  * @property description
  *           The tooltip description to use.
  */
+@ComponentProperty
 @MustBeDocumented
 @Retention(AnnotationRetention.RUNTIME)
 @Target(AnnotationTarget.FIELD)
-@ComponentProperty
 annotation class HelpsBy(
     val description: String
 )

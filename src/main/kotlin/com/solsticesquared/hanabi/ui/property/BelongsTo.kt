@@ -24,10 +24,10 @@ package com.solsticesquared.hanabi.ui.property
  * @property group
  *           The component group that a property should be visualized with.
  */
+@ComponentProperty
 @MustBeDocumented
 @Retention(AnnotationRetention.RUNTIME)
 @Target(AnnotationTarget.FIELD)
-@ComponentProperty
 annotation class BelongsTo(
     val group: String
 )

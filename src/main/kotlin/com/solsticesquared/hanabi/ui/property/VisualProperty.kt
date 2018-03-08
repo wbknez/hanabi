@@ -26,8 +26,8 @@ package com.solsticesquared.hanabi.ui.property
  * properties may only be marked with a single annotation that has been
  * tagged with this one.
  */
+@ComponentProperty
 @MustBeDocumented
 @Retention(AnnotationRetention.RUNTIME)
 @Target(AnnotationTarget.ANNOTATION_CLASS)
-@ComponentProperty
 annotation class VisualProperty
